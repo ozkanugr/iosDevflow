@@ -87,9 +87,10 @@ When starting new features, use the PRD workflow:
 
 1. **Brainstorm**: `/brainstorm new [project-type]` — 5-phase structured ideation
 2. **Create PRD**: `/create-prd` — Generate formal product requirements
-3. **Generate Spec**: `/generate-spec <feature>` — Detailed feature specification
-4. **Generate Tasks**: `/generate-tasks <feature>` — Implementation task breakdown
-5. **Implement**: Build incrementally with tests, use `/review` for quality checks
+3. **Create Architecture**: `/create-architecture` — Design architecture from PRD, auto-updates CLAUDE.md
+4. **Generate Spec**: `/generate-spec <feature>` — Detailed feature specification
+5. **Generate Tasks**: `/generate-tasks <feature>` — Implementation task breakdown
+6. **Implement**: Build incrementally with tests, use `/review` for quality checks
 
 ## Available Commands
 
@@ -97,12 +98,12 @@ When starting new features, use the PRD workflow:
 |---------|-------------|
 | `/brainstorm [new\|resume\|list] [type]` | Structured ideation (5W1H + Design Thinking + Lean Canvas + MoSCoW) |
 | `/create-prd [session]` | Generate PRD from brainstorm or guided discovery |
+| `/create-architecture [prd]` | Generate architecture from PRD, auto-updates CLAUDE.md |
 | `/generate-spec <feature>` | Create detailed feature specification |
 | `/generate-tasks <feature>` | Break down into implementable tasks |
 | `/build` | Build project and report errors |
 | `/test [pattern]` | Run tests and report results |
-| `/create-feature <name>` | Scaffold new feature with standard structure |
-
+| `/create-feature <n>` | Scaffold new feature with standard structure |
 ## Available Agents
 
 | Agent | Purpose | Model |

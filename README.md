@@ -133,15 +133,19 @@ Your original iosDevflow templates are now fully wired into the Claude Code sett
 ## 📝 PRD Workflow
 
 ```
-/brainstorm → /create-prd → /generate-spec → /generate-tasks
+/brainstorm → /create-prd → /create-architecture → /generate-spec → /generate-tasks
+                   │                 │
+                   │                 └── Auto-updates CLAUDE.md
+                   └── Auto-updates CLAUDE.md
 ```
 
 | Phase | Command | Methodology | Output |
 |-------|---------|-------------|--------|
 | 1 | `/brainstorm new [type]` | 5W1H + Design Thinking + Lean Canvas + MoSCoW + User Stories | `docs/brainstorm/session-*.md` |
-| 2 | `/create-prd` | PRD generation from session or guided discovery | `docs/PRD.md` |
-| 3 | `/generate-spec <feature>` | Technical design from PRD | `docs/specs/<feature>.md` |
-| 4 | `/generate-tasks <feature>` | Task breakdown from spec | `docs/tasks/<feature>-tasks.md` |
+| 2 | `/create-prd` | PRD generation from session or guided discovery | `docs/PRD.md` + updates `CLAUDE.md` |
+| 3 | `/create-architecture` | Architecture design from PRD | `docs/ARCHITECTURE.md` + updates `CLAUDE.md` |
+| 4 | `/generate-spec <feature>` | Technical design from PRD | `docs/specs/<feature>.md` |
+| 5 | `/generate-tasks <feature>` | Task breakdown from spec | `docs/tasks/<feature>-tasks.md` |
 
 Project types: `mobile-app`, `library`, `backend`, `cli`, `multi-platform`
 

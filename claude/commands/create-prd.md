@@ -237,11 +237,24 @@ Questions requiring stakeholder input:
 ## Output
 
 - Complete PRD document at `docs/PRD.md`
+- Auto-updated `CLAUDE.md` with project context (name, platform, core features)
 - List of open questions requiring stakeholder input
 - Dependencies clearly documented
 - Suggested next steps:
+  - `/create-architecture` to generate architecture document
   - `/generate-spec [feature]` to create detailed feature specifications
   - `/generate-tasks [feature]` to break down into development tasks
+
+## Post-Generation: Auto-Update CLAUDE.md
+
+After PRD is generated, automatically update `CLAUDE.md`:
+
+1. Extract from generated PRD:
+   - Project name → CLAUDE.md title
+   - Target platform → Quick Reference
+   - Core features summary → Project context
+2. Update CLAUDE.md Quick Reference section
+3. Preserve all other CLAUDE.md sections
 
 ## Validation Checklist
 

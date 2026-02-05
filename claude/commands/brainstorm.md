@@ -146,4 +146,24 @@ The brainstorming session provides structured input for:
 | MoSCoW | Core Features, Out of Scope |
 | User Stories | Feature Specifications |
 
+## Workflow Chain
+
+```
+/brainstorm → /create-prd → /create-architecture → /generate-spec → /generate-tasks
+     │              │                │
+     │              │                └── Auto-updates CLAUDE.md
+     │              └── Auto-updates CLAUDE.md
+     └── Creates session in docs/brainstorm/
+```
+
 Running `/create-prd` after brainstorming will automatically reference the session.
+
+## Dependency Tracking
+
+| Step | Input | Output | Status |
+|------|-------|--------|--------|
+| 1. Brainstorm | User input | `docs/brainstorm/session-*.md` | Creates |
+| 2. Create PRD | Session file | `docs/PRD.md`, updates `CLAUDE.md` | Depends on Step 1 |
+| 3. Create Architecture | PRD.md | `docs/ARCHITECTURE.md`, updates `CLAUDE.md` | Depends on Step 2 |
+| 4. Generate Spec | PRD.md, ARCHITECTURE.md | `docs/specs/*.md` | Depends on Step 2-3 |
+| 5. Generate Tasks | Spec file | `docs/tasks/*-tasks.md` | Depends on Step 4 |
