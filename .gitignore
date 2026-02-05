@@ -1,0 +1,38 @@
+# ── Claude Code ──
+.claude/settings.local.json
+.claude/audit.log
+.claude/errors.log
+.claude/memory.json
+.claude/plans/*.plan
+
+# ── Environment & Secrets ──
+.env
+.env.*
+.env.local
+.env.production
+secrets/
+*.pem
+*.key
+*.p12
+
+# ── Dependencies ──
+node_modules/
+.pnp.*
+
+# ── Build outputs ──
+dist/
+build/
+.next/
+target/
+*.xcarchive
+
+# ── OS files ──
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ── IDE ──
+.idea/
+*.xcuserdata/
+.vscode/settings.json
