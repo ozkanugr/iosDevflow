@@ -1,9 +1,65 @@
 # iosDevflow — Claude Code Configuration Framework
 
-> A comprehensive, schema-compliant Claude Code project configuration featuring the iosDevflow brainstorming engine, PRD workflow, agents, skills, hooks, and commands — all wired into the official `settings.json` schema.
+> A comprehensive, schema-compliant Claude Code project configuration featuring the **dynamic multi-mode brainstorming engine** (14 modes), PRD workflow, agents, skills, hooks, and commands — all wired into the official `settings.json` schema.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-blue.svg)](https://claude.ai/code)
+
+---
+
+## 🧠 Dynamic Multi-Mode Brainstorming
+
+The brainstorming engine supports **14 combinable modes** with **intelligent auto-detection**:
+
+```bash
+# Auto-detect modes based on description (RECOMMENDED)
+/brainstorm A fitness tracking app for runners
+/brainstorm Healthcare appointment booking system        # Auto-detects: high-risk modes
+/brainstorm New social platform to compete with Instagram # Auto-detects: competitive modes
+
+# Or specify modes explicitly
+/brainstorm full A fitness tracking app for runners
+/brainstorm quick A new settings page
+/brainstorm 5w1h,swot,competitor,moscow An AI writing assistant
+/brainstorm validate A healthcare data system
+```
+
+### Auto-Detection
+
+When no modes specified, the system analyzes your description and selects appropriate modes:
+
+| Detected Signal | Auto-Added Modes |
+|-----------------|------------------|
+| Healthcare, Finance, Legal | `risk`, `assumption`, `reverse` |
+| Startup, SaaS, Business | `lean-canvas`, `jtbd` |
+| Competitor, Market | `competitor`, `swot` |
+| Innovative, Creative | `starburst`, `scamper` |
+| Simple feature | `quick` preset |
+| Complex platform | `full` + extended modes |
+
+### Available Modes
+
+| Core Modes | Extended Modes |
+|------------|----------------|
+| `5w1h` - WHO, WHAT, WHEN, WHERE, WHY, HOW | `reverse` - Failure mode analysis |
+| `design-thinking` - User-centered design | `starburst` - Question explosion |
+| `lean-canvas` - Business model | `scamper` - Innovation technique |
+| `moscow` - Feature prioritization | `swot` - Strategic analysis |
+| `user-stories` - Implementation specs | `competitor` - Competitive analysis |
+| | `jtbd` - Jobs-to-be-Done |
+| | `risk` - Risk assessment |
+| | `assumption` - Assumption validation |
+| | `six-hats` - Multi-perspective thinking |
+
+### Presets
+
+| Preset | Expands To | Best For |
+|--------|------------|----------|
+| `full` | 5w1h → design-thinking → lean-canvas → moscow → user-stories | New projects |
+| `quick` | 5w1h → moscow | Quick features |
+| `validate` | reverse → swot → risk → assumption | Risk assessment |
+| `ideate` | starburst → scamper → six-hats | Creative exploration |
+| `business` | lean-canvas → swot → competitor → jtbd | Business model |
 
 ---
 
@@ -12,6 +68,7 @@
 ```
 project-root/
 ├── CLAUDE.md                                  # Project memory & instructions
+├── brainstorm-and-prd.md                      # Multi-mode brainstorming documentation
 ├── .mcp.json                                  # MCP server definitions
 ├── .gitignore                                 # Git ignores (includes .claude/settings.local.json)
 │
@@ -22,20 +79,21 @@ project-root/
 │   ├── agents/                                # Subagent definitions
 │   │   ├── _base-agent.md                     # Universal agent template
 │   │   ├── architect.md                       # System design (Opus)
-│   │   ├── brainstorm.md                      # 5-phase brainstorming (Opus)
+│   │   ├── brainstorm.md                      # Multi-mode brainstorming (Opus)
 │   │   ├── researcher.md                      # Technical research (Sonnet)
 │   │   ├── reviewer.md                        # Code review (Sonnet)
 │   │   └── specialist.md                      # Domain expert template
 │   │
 │   ├── commands/                              # Slash commands (/command-name)
 │   │   ├── _base-command.md                   # Command template
-│   │   ├── brainstorm.md                      # /brainstorm [new|resume] [type]
+│   │   ├── brainstorm.md                      # /brainstorm <modes> <app details>
 │   │   ├── build.md                           # /build
 │   │   ├── create-feature.md                  # /create-feature <n>
 │   │   ├── create-prd.md                      # /create-prd [session]
 │   │   ├── generate-spec.md                   # /generate-spec <feature>
 │   │   ├── generate-tasks.md                  # /generate-tasks <feature>
 │   │   └── test.md                            # /test
+│   │
 │   ├── hooks/                                 # Lifecycle scripts (wired in settings.json)
 │   │   ├── session-start.sh                   # → SessionStart hook
 │   │   ├── post-edit.sh                       # → PostToolUse (Write|Edit) hook
@@ -44,10 +102,10 @@ project-root/
 │   │
 │   ├── skills/                                # Auto-activated capabilities
 │   │   ├── _base-skill/SKILL.md               # Skill template
-│   │   ├── brainstorming/                     # 5-phase brainstorming engine
-│   │   │   ├── SKILL.md                       # Main methodology
+│   │   ├── brainstorming/                     # Multi-mode brainstorming engine
+│   │   │   ├── SKILL.md                       # 14 modes methodology
 │   │   │   ├── references/
-│   │   │   │   ├── question-bank.md           # 100+ curated questions
+│   │   │   │   ├── question-bank.md           # 200+ curated questions
 │   │   │   │   ├── design-thinking.md         # Design Thinking guide
 │   │   │   │   └── lean-canvas.md             # Lean Canvas guide
 │   │   │   └── templates/
@@ -139,15 +197,56 @@ Your original iosDevflow templates are now fully wired into the Claude Code sett
                    └── Auto-updates CLAUDE.md
 ```
 
-| Phase | Command | Methodology | Output |
-|-------|---------|-------------|--------|
-| 1 | `/brainstorm new [type]` | 5W1H + Design Thinking + Lean Canvas + MoSCoW + User Stories | `docs/brainstorm/session-*.md` |
-| 2 | `/create-prd` | PRD generation from session or guided discovery | `docs/PRD.md` + updates `CLAUDE.md` |
-| 3 | `/create-architecture` | Architecture design from PRD | `docs/ARCHITECTURE.md` + updates `CLAUDE.md` |
-| 4 | `/generate-spec <feature>` | Technical design from PRD | `docs/specs/<feature>.md` |
-| 5 | `/generate-tasks <feature>` | Task breakdown from spec | `docs/tasks/<feature>-tasks.md` |
+### Brainstorm Command
 
-Project types: `mobile-app`, `library`, `backend`, `cli`, `multi-platform`
+```bash
+/brainstorm [mode(s)] <application details>
+```
+
+Modes are **optional** - if not specified, they are auto-detected from your description.
+
+**Examples:**
+```bash
+# Auto-detection (recommended)
+/brainstorm A task management mobile app
+/brainstorm Healthcare patient portal with appointments
+/brainstorm Innovative social app for local communities
+
+# Explicit modes
+/brainstorm full A task management mobile app
+/brainstorm 5w1h,lean-canvas,moscow A SaaS analytics platform
+/brainstorm quick A user profile settings feature
+/brainstorm validate,competitor A fintech payment solution
+```
+
+### Session Management
+
+```bash
+/brainstorm resume          # Continue latest session
+/brainstorm list            # Show all sessions
+/brainstorm add <modes>     # Add modes to current session
+```
+
+### Workflow Phases
+
+| Phase | Command | Output |
+|-------|---------|--------|
+| 1 | `/brainstorm <modes> <app>` | `docs/brainstorm/session-*.md` |
+| 2 | `/create-prd` | `docs/PRD.md` + updates `CLAUDE.md` |
+| 3 | `/create-architecture` | `docs/ARCHITECTURE.md` + updates `CLAUDE.md` |
+| 4 | `/generate-spec <feature>` | `docs/specs/<feature>.md` |
+| 5 | `/generate-tasks <feature>` | `docs/tasks/<feature>-tasks.md` |
+
+### Mode Selection Guide
+
+| Scenario | Recommended |
+|----------|-------------|
+| Brand new product | `full` preset |
+| Quick feature scoping | `quick` preset |
+| High-risk/regulated domain | `5w1h,validate` |
+| Competitive market | `business` preset |
+| Creative exploration | `ideate` preset |
+| Before major investment | `5w1h,assumption,risk,competitor` |
 
 ---
 
@@ -156,7 +255,7 @@ Project types: `mobile-app`, `library`, `backend`, `cli`, `multi-platform`
 ```bash
 # 1. Copy everything to your project root
 cp -r .claude/ your-project/
-cp CLAUDE.md .mcp.json .gitignore your-project/
+cp CLAUDE.md .mcp.json .gitignore brainstorm-and-prd.md your-project/
 cp -r docs/ your-project/
 
 # 2. Make hooks executable
@@ -175,9 +274,37 @@ chmod +x your-project/.claude/hooks/*.sh
 cd your-project
 claude  # or launch Claude Code
 
-# 7. Try the PRD workflow
-# /brainstorm new mobile-app
+# 7. Try the brainstorming workflow
+# /brainstorm full A fitness tracking app for runners
 ```
+
+---
+
+## 📖 Brainstorming Modes Reference
+
+### Core Modes
+
+| Mode | Description | Questions |
+|------|-------------|-----------|
+| `5w1h` | Comprehensive WHO, WHAT, WHEN, WHERE, WHY, HOW discovery | ~50 |
+| `design-thinking` | Empathize → Define → Ideate → Prototype → Test | ~25 |
+| `lean-canvas` | One-page business model canvas | ~25 |
+| `moscow` | Must/Should/Could/Won't prioritization | ~25 |
+| `user-stories` | Story generation with acceptance criteria | ~15 |
+
+### Extended Modes
+
+| Mode | Description | Questions |
+|------|-------------|-----------|
+| `reverse` | "What could make this fail?" - inverted problem solving | ~15 |
+| `starburst` | Question-explosion (generate 60+ questions) | ~60 |
+| `scamper` | Substitute, Combine, Adapt, Modify, Put to use, Eliminate, Reverse | ~35 |
+| `swot` | Strengths, Weaknesses, Opportunities, Threats | ~20 |
+| `competitor` | Competitive landscape and differentiation | ~20 |
+| `jtbd` | Jobs-to-be-Done framework | ~30 |
+| `risk` | Risk identification and assessment | ~25 |
+| `assumption` | Surface and validate hidden assumptions | ~25 |
+| `six-hats` | Six Thinking Hats multi-perspective analysis | ~30 |
 
 ---
 
@@ -194,5 +321,16 @@ claude  # or launch Claude Code
 
 ---
 
-*Framework Version: 2.0.0 — Schema-Compatible Edition*
+## 📄 Key Files
+
+| File | Purpose |
+|------|---------|
+| `brainstorm-and-prd.md` | Complete brainstorming system documentation |
+| `claude/commands/brainstorm.md` | Command definition with all 14 modes |
+| `claude/skills/brainstorming/SKILL.md` | Full methodology reference |
+| `claude/skills/brainstorming/references/question-bank.md` | 200+ questions for all modes |
+
+---
+
+*Framework Version: 2.1.0 — Multi-Mode Brainstorming Edition*
 *Compatible with Claude Code*
