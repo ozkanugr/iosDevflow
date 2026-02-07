@@ -242,8 +242,7 @@ Questions requiring stakeholder input:
 - Dependencies clearly documented
 - Suggested next steps:
   - `/create-architecture` to generate architecture document
-  - `/generate-spec [feature]` to create detailed feature specifications
-  - `/generate-tasks [feature]` to break down into development tasks
+  - `/generate-tasks [feature]` to create feature specification with implementation task breakdown
 
 ## Post-Generation: Auto-Update CLAUDE.md
 

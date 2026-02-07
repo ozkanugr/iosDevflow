@@ -73,8 +73,7 @@ After generating `docs/ARCHITECTURE.md`, automatically update `CLAUDE.md`:
 
 ## Suggested Next Steps
 
-- `/generate-spec <feature>` to create detailed feature specifications
-- `/generate-tasks <feature>` to break down into development tasks
+- `/generate-tasks <feature>` to create feature specification with implementation task breakdown
 
 ## Validation Checklist
 

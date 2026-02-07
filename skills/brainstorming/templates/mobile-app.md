@@ -163,5 +163,4 @@ Priority: Must | Estimate: M | Sprint: 1
 
 ## Next Steps
 - [ ] `/create-prd` - Generate PRD
-- [ ] `/generate-spec` - Create specs
-- [ ] `/generate-tasks` - Break down tasks
+- [ ] `/generate-tasks` - Create feature specification with implementation tasks

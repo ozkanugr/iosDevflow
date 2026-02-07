@@ -314,7 +314,7 @@
 
   "companyAnnouncements": [
     "📋 Use /brainstorm to start a structured ideation session",
-    "📝 PRD workflow: /brainstorm → /create-prd → /create-architecture → /generate-spec → /generate-tasks",
+    "📝 PRD workflow: /brainstorm → /create-prd → /create-architecture → /generate-tasks",
     "🔒 Secrets and .env files are protected — never hardcode credentials"
   ]
 }

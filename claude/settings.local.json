@@ -1,10 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "env": {
-    "ANTHROPIC_SMALL_FAST_MODEL": "claude-haiku-4-5-20251001",
-    "DEBUG": "app:*",
-    "LOG_LEVEL": "debug"
-  },
+
+  "model": "claude-opus-4-5-20251101",
+  "alwaysThinkingEnabled": true,
+
   "permissions": {
     "allow": [
       "Bash(npm run dev)",
@@ -13,11 +12,10 @@
       "Bash(./scripts/local-*.sh)"
     ]
   },
-  "model": "claude-opus-4-5-20251101",
-  "alwaysThinkingEnabled": true,
-  "enabledMcpjsonServers": [
-    "memory",
-    "filesystem"
-  ],
-  "enableAllProjectMcpServers": true
+
+  "env": {
+    "ANTHROPIC_SMALL_FAST_MODEL": "claude-haiku-4-5-20251001",
+    "DEBUG": "app:*",
+    "LOG_LEVEL": "debug"
+  }
 }

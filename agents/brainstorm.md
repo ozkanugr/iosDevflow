@@ -232,7 +232,7 @@ After all modes complete:
 - Summarize key decisions
 - Recommend next steps:
   - `/create-prd` for formal PRD
-  - `/generate-spec` for feature specs
+  - `/generate-tasks` for feature specification with implementation tasks
   - Additional modes to explore
 
 ## Rules
@@ -297,8 +297,7 @@ The session document includes:
 After brainstorming is complete, the session feeds into:
 - `/create-prd` - Generates formal PRD from session
 - `/create-architecture` - Creates architecture document
-- `/generate-spec` - Creates feature specifications
-- `/generate-tasks` - Breaks down into development tasks
+- `/generate-tasks` - Creates feature specification with implementation task breakdown
 
 ## References
 

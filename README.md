@@ -88,10 +88,10 @@ project-root/
 │   │   ├── _base-command.md                   # Command template
 │   │   ├── brainstorm.md                      # /brainstorm <modes> <app details>
 │   │   ├── build.md                           # /build
+│   │   ├── create-architecture.md             # /create-architecture [prd]
 │   │   ├── create-feature.md                  # /create-feature <n>
 │   │   ├── create-prd.md                      # /create-prd [session]
-│   │   ├── generate-spec.md                   # /generate-spec <feature>
-│   │   ├── generate-tasks.md                  # /generate-tasks <feature>
+│   │   ├── generate-tasks.md                  # /generate-tasks <feature> (spec + tasks)
 │   │   └── test.md                            # /test
 │   │
 │   ├── hooks/                                 # Lifecycle scripts (wired in settings.json)
@@ -125,10 +125,8 @@ project-root/
     ├── PRD.md                                 # Product Requirements Document
     ├── ARCHITECTURE.md                        # Architecture decisions
     ├── brainstorm/                            # Brainstorming sessions
-    ├── specs/                                 # Feature specifications
-    │   └── template.md
-    └── tasks/                                 # Task breakdowns
-        └── template.md
+    └── tasks/                                 # Feature specs + task breakdowns
+        └── template.md                        # Unified spec + tasks template
 ```
 
 ---
@@ -191,8 +189,9 @@ Your original iosDevflow templates are now fully wired into the Claude Code sett
 ## 📝 PRD Workflow
 
 ```
-/brainstorm → /create-prd → /create-architecture → /generate-spec → /generate-tasks
-                   │                 │
+/brainstorm → /create-prd → /create-architecture → /generate-tasks
+                   │                 │                    │
+                   │                 │                    └── Feature spec + implementation tasks
                    │                 └── Auto-updates CLAUDE.md
                    └── Auto-updates CLAUDE.md
 ```
@@ -234,8 +233,7 @@ Modes are **optional** - if not specified, they are auto-detected from your desc
 | 1 | `/brainstorm <modes> <app>` | `docs/brainstorm/session-*.md` |
 | 2 | `/create-prd` | `docs/PRD.md` + updates `CLAUDE.md` |
 | 3 | `/create-architecture` | `docs/ARCHITECTURE.md` + updates `CLAUDE.md` |
-| 4 | `/generate-spec <feature>` | `docs/specs/<feature>.md` |
-| 5 | `/generate-tasks <feature>` | `docs/tasks/<feature>-tasks.md` |
+| 4 | `/generate-tasks <feature>` | `docs/tasks/<feature>.md` (spec + tasks) |
 
 ### Mode Selection Guide
 
@@ -326,9 +324,10 @@ claude  # or launch Claude Code
 | File | Purpose |
 |------|---------|
 | `brainstorm-and-prd.md` | Complete brainstorming system documentation |
-| `claude/commands/brainstorm.md` | Command definition with all 14 modes |
-| `claude/skills/brainstorming/SKILL.md` | Full methodology reference |
-| `claude/skills/brainstorming/references/question-bank.md` | 200+ questions for all modes |
+| `.claude/commands/brainstorm.md` | Command definition with all 14 modes |
+| `.claude/commands/generate-tasks.md` | Unified spec + tasks generation |
+| `.claude/skills/brainstorming/SKILL.md` | Full methodology reference |
+| `.claude/skills/brainstorming/references/question-bank.md` | 200+ questions for all modes |
 
 ---
 

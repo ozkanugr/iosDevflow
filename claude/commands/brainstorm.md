@@ -710,7 +710,7 @@ Six Thinking Hats - structured parallel thinking.
 ### Recommended Next Steps
 - [ ] Additional modes to run: [suggestions]
 - [ ] Generate PRD: /create-prd
-- [ ] Generate specs: /generate-spec [feature]
+- [ ] Generate tasks: /generate-tasks [feature]
 ```
 
 ---

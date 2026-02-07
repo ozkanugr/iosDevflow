@@ -217,5 +217,4 @@ Priority: Must | Estimate: M | Sprint: 1
 
 ## Next Steps
 - [ ] `/create-prd` - Generate PRD document
-- [ ] `/generate-spec` - Generate API specifications
-- [ ] `/generate-tasks` - Create task breakdown
+- [ ] `/generate-tasks` - Create feature specification with implementation tasks
